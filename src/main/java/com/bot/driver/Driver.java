@@ -33,6 +33,7 @@ public class Driver extends ListenerAdapter {
         try {
             Path path = Paths.get("./src/main/resources/keystore.txt");
             token = new String(Files.readAllBytes(path));
+            token = token.replace("\n", "").replace("\r", "");
             //token = System.getenv("DISCORD_KEY");
             jda = JDABuilder.createDefault(token, EnumSet.allOf(GatewayIntent.class))
                     .setActivity(Activity.watching("my elo drop"))
