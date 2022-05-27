@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.bot.driver.Driver.class</mainClass>
+                            <mainClass>com.bot.driver.Driver</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
