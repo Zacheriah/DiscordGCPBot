@@ -1,6 +1,6 @@
-package com.bot.features;
+package com.bot.service;
 
-import com.bot.entities.BirthdayUser;
+import com.bot.model.BirthdayUser;
 import net.dv8tion.jda.api.JDA;
 
 import java.text.ParseException;
@@ -21,7 +21,6 @@ public class BirthdayTask extends TimerTask {
     public void run() {
         System.out.println("Running daily Birthday task");
         try {
-            System.out.println("Is it someone's birthday?");
             Date date = new Date();
             today.setTime(date);
             Calendar birthdayDay = Calendar.getInstance();
@@ -29,10 +28,7 @@ public class BirthdayTask extends TimerTask {
             Date birthDate = null;
             BirthdayUser birthdayUser;
 
-            System.out.println(birthdayList.size());
-
-            for (int i = 0; i < birthdayList.size() - 1; i++) {
-                System.out.println("Is it " + birthdayList.get(i).getName() + "'s birthday?");
+            for (int i = 0; i < birthdayList.size(); i++) {
                 birthDate = dateFormat.parse(birthdayList.get(i).getBirthdayString());
                 birthdayDay.setTime(birthDate);
                 if (today.get(Calendar.MONTH) == birthdayDay.get(Calendar.MONTH) && today.get(Calendar.DATE) == birthdayDay.get(Calendar.DATE)) {

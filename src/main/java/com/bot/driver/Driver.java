@@ -7,13 +7,12 @@ Feature list:
 - all of the above of the month
 - Birthday announcer
  */
-import com.bot.entities.BirthdayUser;
-import com.bot.features.BirthdayTask;
-import com.bot.features.Birthdays;
+import com.bot.service.BirthdayTask;
+import com.bot.service.Birthdays;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.*;
-import com.bot.features.Listener;
+import com.bot.service.Listener;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 

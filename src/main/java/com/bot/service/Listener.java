@@ -1,4 +1,4 @@
-package com.bot.features;
+package com.bot.service;
 
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Member;
@@ -10,11 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.OffsetDateTime;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import static com.bot.features.TopPostsOfTheWeek.*;
-import static net.dv8tion.jda.api.utils.TimeUtil.getDiscordTimestamp;
+import static com.bot.service.TopPostsOfTheWeek.*;
 
 public class Listener extends ListenerAdapter {
 

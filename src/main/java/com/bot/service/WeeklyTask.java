@@ -1,4 +1,4 @@
-package com.bot.features;
+package com.bot.service;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
-import static com.bot.features.TopPostsOfTheWeek.*;
+import static com.bot.service.TopPostsOfTheWeek.*;
 
 public class WeeklyTask extends TimerTask {
 
@@ -29,7 +29,7 @@ public class WeeklyTask extends TimerTask {
             Message message = channel.retrieveMessageById(channel.getLatestMessageId()).submit().get();
             OffsetDateTime offsetDateTime = date.toInstant().atOffset(message.getTimeCreated().getOffset());
             MessageChannel channel = message.getChannel();
-            List<Message> messageList = new ArrayList<Message>();
+            List<Message> messageList = new ArrayList<>();
 
             for(Message currentMessage : channel.getIterableHistory()){
                 if(currentMessage.getTimeCreated().isAfter(offsetDateTime)){

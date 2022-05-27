@@ -1,4 +1,4 @@
-package com.bot.entities;
+package com.bot.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

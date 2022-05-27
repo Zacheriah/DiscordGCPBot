@@ -1,6 +1,6 @@
-package com.bot.features;
+package com.bot.service;
 
-import com.bot.entities.BirthdayUser;
+import com.bot.model.BirthdayUser;
 import com.sombrainc.excelorm.e2.EReader;
 import com.sombrainc.excelorm.e2.impl.Bind;
 import net.dv8tion.jda.api.JDA;
@@ -26,7 +26,7 @@ public class Birthdays {
                         new Bind("name", "B2"),
                         new Bind("birthdayString", "C2"),
                         new Bind("discord_id", "D2"))
-                .pick("A2:A12")
+                .pick("A2:A13")
                 .go();
     }
 
@@ -36,7 +36,7 @@ public class Birthdays {
         Calendar birthdayDay = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date birthDate = null;
-        for(int i = 0; i < birthdayList.size() - 1; i++){
+        for(int i = 0; i < birthdayList.size(); i++){
 
             birthDate = dateFormat.parse(birthdayList.get(i).getBirthdayString());
             birthdayDay.setTime(birthDate);

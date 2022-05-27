@@ -1,4 +1,4 @@
-package com.bot.features;
+package com.bot.service;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
