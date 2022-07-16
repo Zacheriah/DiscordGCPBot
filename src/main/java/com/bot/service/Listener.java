@@ -49,8 +49,12 @@ public class Listener extends ListenerAdapter {
                 }
 
                 Message topMessage = returnMostUpvoted(messageList);
-                System.out.print("for loop done wowzers");
-                channel.sendMessage("The top message of the past week is: " + topMessage.getJumpUrl()).queue();
+
+                if(topMessage != null){
+                    channel.sendMessage("The top message of the past week is: " + topMessage.getJumpUrl()).queue();
+                }else{
+                    channel.sendMessage("There is no top message this week, use the upvote reaction on your favorite messages to get this working!").queue();
+                }
 
             }else if(message.getContentRaw().equals("!controversial")){
                 //Deprecated
@@ -66,9 +70,13 @@ public class Listener extends ListenerAdapter {
                     }
                 }
 
-                Message topMessage = returnMostReacted(messageList);
-                System.out.print("for loop done wowzers");
-                channel.sendMessage("The most controversial message of the past week is: " + topMessage.getJumpUrl()).queue();
+                Message controvMessage = returnMostReacted(messageList);
+
+                if(controvMessage != null){
+                    channel.sendMessage("The most controversial message of the past week is: " + controvMessage.getJumpUrl()).queue();
+                }else{
+                    channel.sendMessage("There is no controversial message this week, react to messages to get this working!").queue();
+                }
 
             }else if(message.getContentRaw().equals("!worst")){
                 //Deprecated
@@ -84,9 +92,13 @@ public class Listener extends ListenerAdapter {
                     }
                 }
 
-                Message topMessage = returnMostDownvoted(messageList);
-                System.out.print("for loop done wowzers");
-                channel.sendMessage("The WORST message of the past week is: " + topMessage.getJumpUrl()).queue();
+                Message worstMessage = returnMostDownvoted(messageList);
+
+                if(worstMessage != null){
+                    channel.sendMessage("The WORST message of the past week is: " + worstMessage.getJumpUrl()).queue();
+                }else{
+                    channel.sendMessage("There were no bad messages this week. Use the downvote reaction to mark your least favorite messages.").queue();
+                }
             }else if(message.getContentRaw().equals("!monthly")) {
                 Date date2 = new Date(System.currentTimeMillis() - (30*DAY_IN_MS));
                 OffsetDateTime offsetDateTime2 = date2.toInstant().atOffset(message.getTimeCreated().getOffset());
@@ -105,11 +117,21 @@ public class Listener extends ListenerAdapter {
                 Message topMessage = returnMostUpvoted(messageList);
                 Message controversialMessage = returnMostReacted(messageList);
                 Message bottomMessage = returnMostDownvoted(messageList);
-                System.out.print("for loop done wowzers");
+
+                String messageToSend = "";
+
+                if(topMessage != null){
+                    messageToSend = messageToSend + "The top message of the past month is: " + topMessage.getJumpUrl() + "\n";
+                }
+                if(controversialMessage != null){
+                    messageToSend = messageToSend + "The most controversial message of the past month is: " + controversialMessage.getJumpUrl() + "\n";
+                }
+                if(bottomMessage != null){
+                    messageToSend = messageToSend + "The worst message of the past month is: " + bottomMessage.getJumpUrl();
+                }
+
                 channel.sendMessage("Here's the roundup for the month: \n" +
-                        "The top message of the past month is: " + topMessage.getJumpUrl() + "\n" +
-                        "The most controversial message of the past month is: " + controversialMessage.getJumpUrl() + "\n" +
-                        "The worst message of the past month is: " + bottomMessage.getJumpUrl()).queue();
+                        messageToSend).queue();
 
             }else if(message.getContentRaw().startsWith("!image")){
 

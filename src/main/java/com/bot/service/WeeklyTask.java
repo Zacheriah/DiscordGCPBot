@@ -15,8 +15,6 @@ import static com.bot.service.TopPostsOfTheWeek.*;
 public class WeeklyTask extends TimerTask {
 
     MessageChannel channel;
-    long DAY_IN_MS = 1000 * 60 * 60 * 24;
-    Date date = new Date(System.currentTimeMillis() - (7*DAY_IN_MS));
 
     public WeeklyTask(MessageChannel channel){
         this.channel = channel;
@@ -24,6 +22,9 @@ public class WeeklyTask extends TimerTask {
 
     @Override
     public void run() {
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        Date date = new Date(System.currentTimeMillis() - (7*DAY_IN_MS));
+
         System.out.println("Weekly Timer task started");
         try {
             Message message = channel.retrieveMessageById(channel.getLatestMessageId()).submit().get();
@@ -46,10 +47,19 @@ public class WeeklyTask extends TimerTask {
             Message controversialMessage = returnMostReacted(messageList);
 
             System.out.println("Weekly Timer task ended");
-            channel.sendMessage("The top message of the past week is: " + topMessage.getJumpUrl() +
-                    "\nThe worst message of the past week is: " + worstMessage.getJumpUrl() +
-                    "\nThe most reacted message of the past week is " + controversialMessage.getJumpUrl())
-                    .queue();
+
+            String messageToSend = "";
+            if(topMessage != null){
+                messageToSend = messageToSend + "The top message of the past month is: " + topMessage.getJumpUrl() + "\n";
+            }
+            if(controversialMessage != null){
+                messageToSend = messageToSend + "The most controversial message of the past month is: " + controversialMessage.getJumpUrl() + "\n";
+            }
+            if(worstMessage != null){
+                messageToSend = messageToSend + "The worst message of the past month is: " + worstMessage.getJumpUrl();
+            }
+
+            channel.sendMessage(messageToSend).queue();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
